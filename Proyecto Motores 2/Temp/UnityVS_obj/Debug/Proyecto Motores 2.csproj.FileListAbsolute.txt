@@ -1,0 +1,21 @@
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.VR.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEngine.VR.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_obj\Debug\Proyecto Motores 2.csprojResolveAssemblyReference.cache
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+C:\Users\diego\Desktop\Proyectos unity\TP prog de motores shotmanager\Proyecto Motores 2\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb
