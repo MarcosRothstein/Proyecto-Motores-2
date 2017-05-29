@@ -20,10 +20,10 @@ public class CurveEditor : Editor {
         _target = (Curve)target;
         handleTransform = _target.transform;
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
-            handleTransform.rotation : Quaternion.identity;
+        handleTransform.rotation : Quaternion.identity;
 
         Vector3 p0 = ShowPoint(0);
-       
+
         for (int i = 1; i < _target.points.Length; i += 3)
         {
             Vector3 p1 = ShowPoint(i);
@@ -33,12 +33,10 @@ public class CurveEditor : Editor {
             Handles.color = Color.gray;
             Handles.DrawLine(p0, p1);
             Handles.DrawLine(p2, p3);
-
             Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
             p0 = p3;
         }
-        ShowDirections();
-
+      
     }
     public override void OnInspectorGUI()
     {
@@ -48,9 +46,10 @@ public class CurveEditor : Editor {
             Undo.RecordObject(_target, "Add Curve");
             _target.AddCurve();
         }
+        
     }
-
-    private void ShowDirections()
+  
+    private void mostrarDir()
     {
         Handles.color = Color.green;
         Vector3 point = _target.GetPoint(0f);

@@ -25,10 +25,17 @@ public class Curve : MonoBehaviour {
 
         point.transform.position += new Vector3 (1f,0f,0f);
         points[points.Length - 3] = Instantiate<Nodo>(Prfab);
+        points[points.Length - 3].transform.SetParent(this.transform);
         point.transform.position += new Vector3(1f, 0f, 0f);
         points[points.Length - 2] = Instantiate<Nodo>(Prfab);
+        points[points.Length - 2].transform.SetParent(this.transform);
         point.transform.position += new Vector3(1f, 0f, 0f);
         points[points.Length - 1] = Instantiate<Nodo>(Prfab);
+        points[points.Length - 1].transform.SetParent(this.transform);
+    }
+    public void deletLastCurve()
+    {
+
     }
     public Vector3 GetPoint(float t)
     {
@@ -39,4 +46,5 @@ public class Curve : MonoBehaviour {
         return transform.TransformPoint(Bezier.GetFirstD(points[0].transform.position, points[1].transform.position, points[2].transform.position, points[3].transform.position, t)) -
             transform.position;
     }
+   
 }
