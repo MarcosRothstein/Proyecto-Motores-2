@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Curve : MonoBehaviour {
     public Nodo Prfab;
-    public Nodo[] points;
-
+    public List<Nodo> points = new List<Nodo>();
     public void Reset()
     {
         for (int i = 0; i < points.Length; i++)

@@ -24,7 +24,7 @@ public class CurveEditor : Editor {
 
         Vector3 p0 = ShowPoint(0);
 
-        for (int i = 1; i < _target.points.Length; i += 3)
+        for (int i = 1; i < _target.points.Count; i += 3)
         {
             Vector3 p1 = ShowPoint(i);
             Vector3 p2 = ShowPoint(i + 1);
@@ -41,12 +41,16 @@ public class CurveEditor : Editor {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        _target = (Curve)target; if (GUILayout.Button("Add Curve"))
+        _target = (Curve)target;
+        if (GUILayout.Button("Add Curve"))
         {
             Undo.RecordObject(_target, "Add Curve");
             _target.AddCurve();
         }
-        
+        if (GUILayout.Button("delete Last Curve"))
+        {
+            _target.deletLastCurve();
+        }
     }
   
     private void mostrarDir()
