@@ -8,7 +8,7 @@ public class Curve : MonoBehaviour {
     public List<Nodo> points = new List<Nodo>();
     public void Reset()
     {
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points.Count; i++)
         {
             points[i].transform.position = new Vector3(i,0f,0f);
         }
@@ -19,20 +19,25 @@ public class Curve : MonoBehaviour {
     }
     public void AddCurve()
     {
-        Nodo point = points[points.Length - 1];
-        point.transform.position += new Vector3 (1f,0f,0f);
-        points[points.Length - 3] = Instantiate<Nodo>(Prfab);
-        points[points.Length - 3].transform.SetParent(this.transform);
-        point.transform.position += new Vector3(1f, 0f, 0f);
-        points[points.Length - 2] = Instantiate<Nodo>(Prfab);
-        points[points.Length - 2].transform.SetParent(this.transform);
-        point.transform.position += new Vector3(1f, 0f, 0f);
-        points[points.Length - 1] = Instantiate<Nodo>(Prfab);
-        points[points.Length - 1].transform.SetParent(this.transform);
+        for (int i = 0; i < 3; i++)
+        {
+            var nodo = Instantiate<Nodo>(Prfab);
+            points.Add(nodo);
+            nodo.transform.position += new Vector3(1f+i, 0f, 0f);
+            nodo.transform.SetParent(this.transform);
+        }       
     }
     public void deletLastCurve()
     {
-
+        if (points.Count >= 3)
+        {
+            var elim = points.GetRange(points.Count - 3, 3);
+            points.RemoveRange(points.Count - 3, 3);
+            for (int i = 0; i < elim.Count; i++)
+            {
+                DestroyImmediate(elim[i].gameObject);
+            }
+        }
     }
     public Vector3 GetPoint(float t)
     {

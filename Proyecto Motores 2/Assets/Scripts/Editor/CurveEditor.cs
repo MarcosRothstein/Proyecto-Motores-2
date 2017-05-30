@@ -12,6 +12,11 @@ public class CurveEditor : Editor {
     private Quaternion handleRotation;
     private const int lineSteps = 10;
 
+    private const float handleSize = 0.04f;
+	private const float pickSize = 0.06f;
+	
+	private int selectedIndex = -1;
+
     private const float directionScale = 0.5f;
 
 
@@ -34,6 +39,7 @@ public class CurveEditor : Editor {
             Handles.DrawLine(p0, p1);
             Handles.DrawLine(p2, p3);
             Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
+
             p0 = p3;
         }
       
@@ -53,7 +59,7 @@ public class CurveEditor : Editor {
         }
     }
   
-    private void mostrarDir()
+    private void showDir()
     {
         Handles.color = Color.green;
         Vector3 point = _target.GetPoint(0f);
@@ -67,12 +73,20 @@ public class CurveEditor : Editor {
     private Vector3 ShowPoint(int index)
     {
         Vector3 point = handleTransform.TransformPoint(_target.points[index].transform.position);
-        EditorGUI.BeginChangeCheck();
-        point = Handles.DoPositionHandle(point, handleRotation);
-        if (EditorGUI.EndChangeCheck())
+        Handles.color = Color.white;
+        if (Handles.Button(point, handleRotation, handleSize, pickSize, Handles.DotCap))
         {
-            Undo.RecordObject(_target, "Move Point");
-            _target.points[index].transform.position = handleTransform.InverseTransformPoint(point);
+            selectedIndex = index;
+        }
+        if (selectedIndex == index)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(_target, "Move Point");
+                _target.points[index].transform.position = handleTransform.InverseTransformPoint(point);
+            }
         }
         return point;
     }
