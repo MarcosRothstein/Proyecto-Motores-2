@@ -20,8 +20,6 @@ public class Curve : MonoBehaviour {
     public void AddCurve()
     {
         Nodo point = points[points.Length - 1];
-        Array.Resize(ref points, points.Length + 3);
-
         point.transform.position += new Vector3 (1f,0f,0f);
         points[points.Length - 3] = Instantiate<Nodo>(Prfab);
         points[points.Length - 3].transform.SetParent(this.transform);
