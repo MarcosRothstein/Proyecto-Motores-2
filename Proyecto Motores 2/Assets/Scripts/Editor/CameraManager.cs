@@ -10,7 +10,7 @@ public class CameraManager : EditorWindow {
 	private Texture2D _preview;
 	private CameraCustome _cc;
 	private bool _previewRendered = false;
-
+	private int currentCam = 0 ;
 
 [MenuItem("Window/Shot editor/Open camera manager")]
 
@@ -86,9 +86,7 @@ public class CameraManager : EditorWindow {
 
 			if(_preview) GUI.DrawTexture(GUILayoutUtility.GetRect(256,256), _preview, ScaleMode.ScaleToFit, false, 1f);
 
-			EditorGUILayout.Vector3Field("Camera Position", _camera.transform.position);
 
-			EditorGUILayout.Vector4Field("Camera Rotation", QuaternionToVector4(_camera.transform.rotation));
 			//EditorGUI.Vector3Field(GUILayoutUtility.GetRect(64,64), "Camera position:", _camera.transform.position);
 
 			EditorGUILayout.LabelField("Number of camera waypoints stored " + _cc.numberOfCameras, EditorStyles.centeredGreyMiniLabel);
@@ -106,8 +104,9 @@ public class CameraManager : EditorWindow {
 		}
 
 
-		if(_cc  != null && _camera != null) 
+		if(_cc  != null && _camera != null && _cc.cameraWaypoints.Count > 0) 
 		{
+			
 		EditorGUILayout.BeginHorizontal();
 
 		//GUILayout.Button("←")
@@ -115,10 +114,23 @@ public class CameraManager : EditorWindow {
 		{
 				Debug.Log("ASDASD");
 
+				if(currentCam  <= _cc.cameraWaypoints.Count)
+				{
+					currentCam--;
+					Debug.Log("CC" +currentCam);
+				} 
+				if(currentCam  <= -1)
+				{
+					currentCam= _cc.cameraWaypoints.Count-1;
+					Debug.Log("CC" +currentCam);
+				}
+
 		}
 		
 		if(GUILayout.Button("Update Preview"))
 		{
+				_camera.transform.position =  _cc.cameraWaypoints[currentCam].transform.position;
+				_camera.transform.rotation = _cc.cameraWaypoints[currentCam].transform.rotation;
 				_previewRendered = false;
 				GetCameraPreview();
 
@@ -126,14 +138,32 @@ public class CameraManager : EditorWindow {
 
 		if(GUILayout.Button("→"))
 		{
-				Debug.Log("ASDASD+++");
+				Debug.Log(_cc.cameraWaypoints.Count);
+
+				if(currentCam  <= _cc.cameraWaypoints.Count)
+				{
+					currentCam++;
+					Debug.Log("CC" +currentCam);
+				} 
+				if(currentCam  == _cc.cameraWaypoints.Count)
+				{
+					currentCam= 0;
+				}
+
+
+			
+			//	Debug.Log(currentCam);
 		}
 
 
 
-		EditorGUILayout.EndHorizontal();
+			EditorGUILayout.EndHorizontal();
 
-			EditorGUILayout.LabelField("Current camera  " + _cc.numberOfCameras, EditorStyles.centeredGreyMiniLabel);
+			EditorGUILayout.Vector3Field("Waypoint Position", _cc.cameraWaypoints[currentCam].transform.position);
+
+			EditorGUILayout.Vector4Field("Waypoint Rotation", QuaternionToVector4( _cc.cameraWaypoints[currentCam].transform.rotation));
+
+			EditorGUILayout.LabelField("Current camera  " + _cc.cameraWaypoints[currentCam], EditorStyles.centeredGreyMiniLabel);
 		}
 
 	
