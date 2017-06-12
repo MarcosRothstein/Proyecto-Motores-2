@@ -22,18 +22,11 @@ public class CameraCustome : MonoBehaviour
 
     public void RemoveLastWaypoint()
     {
-        int currentCam = 0;
-        foreach (CameraWaypoints cam in cameraWaypoints)
-        {
-            currentCam++;
-            if (currentCam == numberOfCameras)
-            { 
-                cameraWaypoints.RemoveAt(numberOfCameras-1);
-                numberOfCameras--;
-                DestroyImmediate(cam.gameObject);
-            }
-
-        }
+        if (numberOfCameras < 1) return;
+        numberOfCameras--;
+        DestroyImmediate(cameraWaypoints[numberOfCameras].gameObject);
+        cameraWaypoints.RemoveAt(numberOfCameras);
+        
     }
 
     public void RemoveAllWaypoints()
