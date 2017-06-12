@@ -33,6 +33,10 @@ public class CameraCustomeEditor : Editor {
         {
             _target.AddWaypoint();
         }
+        if (GUILayout.Button("Remove last camera"))
+        {
+            _target.RemoveLastWaypoint();
+        }
         if (GUILayout.Button("Remove all cameras"))
         {
             _target.RemoveAllWaypoints();
@@ -45,7 +49,7 @@ public class CameraCustomeEditor : Editor {
 
 
         //Recorre la lista y grafica por cada elemento en ella sus elementos
-        for (int i = 0; i < _target.cameraWaypoints.Count; i++)
+        for (int i = 0; i < _target.numberOfCameras; i++)
         {
             // _target.cameraWaypoints[i] = (CameraWaypoints)EditorGUILayout.ObjectField(_target.cameraWaypoints[i], typeof(CameraWaypoints));
             _target.cameraWaypoints[i].cameraName = EditorGUILayout.TextField(_target.cameraWaypoints[i].cameraName);
