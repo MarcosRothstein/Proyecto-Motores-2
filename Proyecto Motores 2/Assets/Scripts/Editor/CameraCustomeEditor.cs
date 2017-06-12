@@ -44,7 +44,8 @@ public class CameraCustomeEditor : Editor {
 
 
         _target.cameraAdded = (CameraWaypoints)EditorGUILayout.ObjectField("Waypoint: ", _target.cameraAdded, typeof(CameraWaypoints), true);
-        
+        _target.curve = (Curve)EditorGUILayout.ObjectField("Curve: ", _target.curve, typeof(Curve), true);
+
 
 
 

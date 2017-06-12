@@ -42,7 +42,7 @@ public class CurveEditor : Editor {
 
             p0 = p3;
         }
-      
+
     }
     public override void OnInspectorGUI()
     {
