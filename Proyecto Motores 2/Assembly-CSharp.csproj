@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bezier.cs" />
+     <Compile Include="Assets\Scripts\CameraCustome.cs" />
+     <Compile Include="Assets\Scripts\CameraWaypoints.cs" />
      <Compile Include="Assets\Scripts\Curve.cs" />
      <Compile Include="Assets\Scripts\Nodo.cs" />
  <Reference Include="UnityEngine.UI">

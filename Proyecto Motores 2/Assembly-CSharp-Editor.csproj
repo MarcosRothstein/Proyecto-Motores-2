@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Editor\CameraCustomeEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Editor\CurveEditor.cs" />
  <Reference Include="UnityEditor.Advertisements">

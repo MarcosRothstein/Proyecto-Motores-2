@@ -7,7 +7,11 @@ using UnityEngine;
 public class CameraManager : EditorWindow {
 
 	private Camera _camera;
-	private RenderTexture _preview;
+	private Texture2D _preview;
+	private CameraCustome _cc;
+	private bool _previewRendered = false;
+
+
 [MenuItem("Window/Shot editor/Open camera manager")]
 
 	static void CreateWindow()
@@ -15,10 +19,43 @@ public class CameraManager : EditorWindow {
 		GetWindow(typeof(CameraManager)).Show();
 
 	}
+
+
+		
+	
 		
 	private void GetCameraPreview()
 	{
-		_preview = new RenderTexture(512,512,0);	
+		if(!_previewRendered)
+		{
+		RenderTexture rt = new RenderTexture(Screen.width,Screen.height, 24);
+		RenderTexture.active = rt;
+		_camera.targetTexture = rt;
+		_preview =  new Texture2D(Screen.width,Screen.height);
+		_camera.Render();
+		_preview.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0);
+		_preview.Apply();
+
+		_camera.targetTexture = null;
+		RenderTexture.active = null;
+		DestroyImmediate(rt);
+		Debug.Log("Rendering thing!");
+			_previewRendered = true;
+		}
+//		if(!_previewRendered)
+//
+//		{
+//
+//			Debug.Log(_preview);
+//			_preview = new RenderTexture(512,512,0);
+//		
+//
+//			_camera.targetTexture = _preview;
+//			_camera.Render();
+//			_camera.targetTexture = null;
+//			_previewRendered = true;
+//		}
+	
 	}
 
 
@@ -26,21 +63,14 @@ public class CameraManager : EditorWindow {
 	{
 		
 		minSize = new Vector2(256, 512);
-		EditorGUILayout.BeginVertical();
+
 		_camera = (Camera)EditorGUILayout.ObjectField("Cámara: ", _camera, typeof(Camera),true);
 
 
 
 
-		EditorGUILayout.BeginHorizontal();
-
-		GUILayout.Button("←");
-		GUILayout.Button("Update");
-		GUILayout.Button("→");
 
 
-		EditorGUILayout.EndHorizontal();
-		EditorGUILayout.EndVertical();
 
 		//_camera.transform.position= EditorGUILayout.Vector3Field("Camera Position ", _camera.transform.position);
 
@@ -50,15 +80,19 @@ public class CameraManager : EditorWindow {
 
 		if(_camera != null)
 		{
+			_cc = _camera.GetComponent<CameraCustome>();
+				
 			GetCameraPreview();
-			_camera.targetTexture = _preview;
-			_camera.Render();
-			_camera.targetTexture = null;
+
 			if(_preview) GUI.DrawTexture(GUILayoutUtility.GetRect(256,256), _preview, ScaleMode.ScaleToFit, false, 1f);
 
 			EditorGUILayout.Vector3Field("Camera Position", _camera.transform.position);
-			
+
+			EditorGUILayout.Vector4Field("Camera Rotation", QuaternionToVector4(_camera.transform.rotation));
 			//EditorGUI.Vector3Field(GUILayoutUtility.GetRect(64,64), "Camera position:", _camera.transform.position);
+
+			EditorGUILayout.LabelField("Number of camera waypoints stored " + _cc.numberOfCameras, EditorStyles.centeredGreyMiniLabel);
+
 
 		}
 		else 
@@ -70,18 +104,50 @@ public class CameraManager : EditorWindow {
 //			GUILayoutUtility.GetRect(128,128);
 
 		}
-			
 
+
+		if(_cc  != null && _camera != null) 
+		{
+		EditorGUILayout.BeginHorizontal();
+
+		//GUILayout.Button("←")
+		if(GUILayout.Button("←"))
+		{
+				Debug.Log("ASDASD");
+
+		}
+		
+		if(GUILayout.Button("Update Preview"))
+		{
+				_previewRendered = false;
+				GetCameraPreview();
+
+		}
+
+		if(GUILayout.Button("→"))
+		{
+				Debug.Log("ASDASD+++");
+		}
+
+
+
+		EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.LabelField("Current camera  " + _cc.numberOfCameras, EditorStyles.centeredGreyMiniLabel);
+		}
 
 	
 	}
 
+	static Vector4 QuaternionToVector4(Quaternion rot)
+	{
+		return new Vector4(rot.x, rot.y, rot.z, rot.w);
+	}
 
 
 	void OnDestroy()
 	{
-		_preview = null;
-		_camera = null;
+		
 	}
 	 	
 }
