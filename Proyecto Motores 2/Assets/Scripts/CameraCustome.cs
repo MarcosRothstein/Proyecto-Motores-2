@@ -6,11 +6,14 @@ public class CameraCustome : MonoBehaviour
 {
     public List<CameraWaypoints> cameraWaypoints;
     public int numberOfCameras=0;
+    public int currentCameraPosition = -1;
     public CameraWaypoints cameraAdded;
     public List<Curve> curves;
     public Curve curve;
     GameObject curveContainer;
     GameObject cameraContainer;
+
+    bool lockedCamera=false;
 
     public void AddWaypoint()
     {
@@ -85,4 +88,45 @@ public class CameraCustome : MonoBehaviour
         if(cameraContainer!=null)DestroyImmediate(cameraContainer.gameObject);
 
     }
+
+
+    public void NextCamera()
+    {
+        //BORRAR
+        lockedCamera = false;
+        if (currentCameraPosition+1 >= numberOfCameras || lockedCamera==true) return;
+        currentCameraPosition++;
+        MoveCamera();
+    }
+
+    public void PrevCamera()
+    {
+        if (currentCameraPosition<=0 || lockedCamera == true) return;
+        currentCameraPosition--;
+        MoveCamera();
+    }
+
+
+
+    void MoveCamera()
+    {
+        transform.position = cameraWaypoints[currentCameraPosition].gameObject.transform.position;
+        transform.rotation = cameraWaypoints[currentCameraPosition].gameObject.transform.rotation;
+
+        /*
+        Debug.Log("Move");
+        lockedCamera = true;
+        while (lockedCamera==true)
+        {
+            transform.position = Vector3.Lerp(transform.position, cameraWaypoints[currentCameraPosition].gameObject.transform.position, cameraWaypoints[currentCameraPosition].speed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, cameraWaypoints[currentCameraPosition].gameObject.transform.rotation, cameraWaypoints[currentCameraPosition].speed * Time.deltaTime);
+            //transform.position = Vector3.Lerp(t1.localScale, t2.localScale, t);
+            if (transform.position == cameraWaypoints[currentCameraPosition].gameObject.transform.position)
+            {
+                lockedCamera = false;
+            }
+        }
+        */
+    }
+
 }

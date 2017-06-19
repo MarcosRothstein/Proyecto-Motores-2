@@ -19,18 +19,26 @@ public class CurveEditor : Editor {
 
     private const float directionScale = 0.5f;
 
+ 
+
     public void Update()
     {
-        OnSceneGUI();
     }
 
-    private void OnSceneGUI()
+ 
+
+    public void OnSceneGUI()
     {
+
+
+
         _target = (Curve)target;
         handleTransform = _target.transform;
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
         handleTransform.rotation : Quaternion.identity;
+        
 
+        //Lo que dibuja la línea en escena
         Vector3 p0 = ShowPoint(0);
 
         for (int i = 1; i < _target.points.Count; i += 3)
@@ -44,14 +52,17 @@ public class CurveEditor : Editor {
             Handles.DrawLine(p2, p3);
             Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
 
-            p0 = p3;
+            //p0 = p3;
         }
+
+
 
     }
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         _target = (Curve)target;
+        /*
         if (GUILayout.Button("Add Curve"))
         {
             Undo.RecordObject(_target, "Add Curve");
@@ -61,8 +72,10 @@ public class CurveEditor : Editor {
         {
             _target.deletLastCurve();
         }
+        */
     }
   
+    /*
     private void showDir()
     {
         Handles.color = Color.green;
@@ -74,6 +87,7 @@ public class CurveEditor : Editor {
             Handles.DrawLine(point, point + _target.GetDirection(i / (float)lineSteps) * directionScale);
         }
     }
+    */
     private Vector3 ShowPoint(int index)
     {
         Vector3 point = handleTransform.TransformPoint(_target.points[index].transform.position);

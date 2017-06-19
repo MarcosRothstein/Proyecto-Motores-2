@@ -41,8 +41,16 @@ public class CameraCustomeEditor : Editor {
         {
             _target.RemoveAllWaypoints();
         }
+        if (GUILayout.Button("Next Camera"))
+        {
+            _target.NextCamera();
+        }
+        if (GUILayout.Button("Previous Camera"))
+        {
+            _target.PrevCamera();
+        }
 
-
+        _target.currentCameraPosition = EditorGUILayout.IntField(_target.currentCameraPosition);
         _target.cameraAdded = (CameraWaypoints)EditorGUILayout.ObjectField("Waypoint: ", _target.cameraAdded, typeof(CameraWaypoints), true);
         _target.curve = (Curve)EditorGUILayout.ObjectField("Curve: ", _target.curve, typeof(Curve), true);
 
