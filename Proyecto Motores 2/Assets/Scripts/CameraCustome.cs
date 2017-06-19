@@ -10,19 +10,29 @@ public class CameraCustome : MonoBehaviour
     public List<Curve> curves;
     public Curve curve;
     GameObject curveContainer;
+    GameObject cameraContainer;
 
     public void AddWaypoint()
     {
         //Debug.Log("Camera added");
+
+        if (cameraContainer == null)
+        {
+            cameraContainer = new GameObject();
+            cameraContainer.gameObject.name = "Camera Positions";
+        }
+
         CameraWaypoints newCamera = Instantiate(cameraAdded,transform.position,transform.rotation);
         numberOfCameras++;
         newCamera.ID = numberOfCameras;
         newCamera.cameraName = "Camera " + newCamera.ID;
         newCamera.gameObject.name = newCamera.cameraName;
         cameraWaypoints.Add(newCamera);
+        newCamera.transform.SetParent(cameraContainer.transform);
+
 
         //Agregar curva
-        if(numberOfCameras>1)
+        if (numberOfCameras>1)
         {
             
             if (curveContainer == null)
@@ -45,10 +55,13 @@ public class CameraCustome : MonoBehaviour
         numberOfCameras--;
         DestroyImmediate(cameraWaypoints[numberOfCameras].gameObject);
         cameraWaypoints.RemoveAt(numberOfCameras);
+        if (cameraContainer != null && numberOfCameras == 0) DestroyImmediate(cameraContainer.gameObject);
+
 
         if (curves.Count < 1) return;
         DestroyImmediate(curves[numberOfCameras - 1].gameObject);
         curves.RemoveAt(numberOfCameras - 1);
+        if (curveContainer != null && curves.Count == 0) DestroyImmediate(curveContainer.gameObject);
 
     }
 
@@ -60,7 +73,7 @@ public class CameraCustome : MonoBehaviour
             DestroyImmediate(c.gameObject);
         }
         curves.Clear();
-
+        if(curveContainer!=null)DestroyImmediate(curveContainer.gameObject);
         //Debug.Log("Remove all cameras");
         numberOfCameras = 0;
         foreach(CameraWaypoints cam in cameraWaypoints)
@@ -69,7 +82,7 @@ public class CameraCustome : MonoBehaviour
             DestroyImmediate(cam.gameObject);
         }
         cameraWaypoints.Clear();
+        if(cameraContainer!=null)DestroyImmediate(cameraContainer.gameObject);
 
-        
     }
 }

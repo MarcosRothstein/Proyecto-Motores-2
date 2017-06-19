@@ -19,6 +19,10 @@ public class CurveEditor : Editor {
 
     private const float directionScale = 0.5f;
 
+    public void Update()
+    {
+        OnSceneGUI();
+    }
 
     private void OnSceneGUI()
     {
