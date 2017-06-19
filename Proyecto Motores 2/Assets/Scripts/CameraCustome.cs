@@ -12,8 +12,15 @@ public class CameraCustome : MonoBehaviour
     public Curve curve;
     GameObject curveContainer;
     GameObject cameraContainer;
-
+    
     bool lockedCamera=false;
+    int time=0;
+
+    [ExecuteInEditMode]
+    void Update()
+    {
+        time++;
+    }
 
     public void AddWaypoint()
     {
@@ -93,40 +100,34 @@ public class CameraCustome : MonoBehaviour
     public void NextCamera()
     {
         //BORRAR
-        lockedCamera = false;
-        if (currentCameraPosition+1 >= numberOfCameras || lockedCamera==true) return;
+        //lockedCamera = false;
+        if (currentCameraPosition+1 >= numberOfCameras) return;
         currentCameraPosition++;
         MoveCamera();
     }
 
     public void PrevCamera()
     {
-        if (currentCameraPosition<=0 || lockedCamera == true) return;
+        if (currentCameraPosition<=0) return;
         currentCameraPosition--;
         MoveCamera();
     }
 
-
-
+    [ExecuteInEditMode]
     void MoveCamera()
     {
-        transform.position = cameraWaypoints[currentCameraPosition].gameObject.transform.position;
-        transform.rotation = cameraWaypoints[currentCameraPosition].gameObject.transform.rotation;
-
-        /*
-        Debug.Log("Move");
+        //transform.position = cameraWaypoints[currentCameraPosition].gameObject.transform.position;
+        //transform.rotation = cameraWaypoints[currentCameraPosition].gameObject.transform.rotation;
         lockedCamera = true;
-        while (lockedCamera==true)
+        transform.position = Vector3.Lerp(transform.position, cameraWaypoints[currentCameraPosition].gameObject.transform.position, cameraWaypoints[currentCameraPosition].speed+1*Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, cameraWaypoints[currentCameraPosition].gameObject.transform.rotation, cameraWaypoints[currentCameraPosition].speed + 1 * Time.deltaTime);
+        if (transform.position == cameraWaypoints[currentCameraPosition].gameObject.transform.position)
         {
-            transform.position = Vector3.Lerp(transform.position, cameraWaypoints[currentCameraPosition].gameObject.transform.position, cameraWaypoints[currentCameraPosition].speed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, cameraWaypoints[currentCameraPosition].gameObject.transform.rotation, cameraWaypoints[currentCameraPosition].speed * Time.deltaTime);
-            //transform.position = Vector3.Lerp(t1.localScale, t2.localScale, t);
-            if (transform.position == cameraWaypoints[currentCameraPosition].gameObject.transform.position)
-            {
-                lockedCamera = false;
-            }
+            lockedCamera = false;
+            return;
         }
-        */
+        if (lockedCamera == true) MoveCamera();
+        
     }
 
 }
